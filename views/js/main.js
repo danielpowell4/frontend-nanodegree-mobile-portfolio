@@ -447,6 +447,8 @@ var resizePizzas = function(size) {
     return dx;
   }
 
+  var newWidth = randomPizzaContainer[0].offsetWidth + dx + 'px';
+
   // Iterates through pizza elements on the page and changes their widths
   function changePizzaSizes(size) {
       // these only need calculated once, not 200 times...
@@ -458,7 +460,7 @@ var resizePizzas = function(size) {
       //var dx = determineDx(document.querySelectorAll(".randomPizzaContainer")[i], size);
       //var newwidth = (document.querySelectorAll(".randomPizzaContainer")[i].offsetWidth + dx) + 'px';
       //document.querySelectorAll(".randomPizzaContainer")[i].style.width = newwidth;
-      randomPizzaContainer[i].style.width = newwidth;
+      randomPizzaContainer[i].style.width = newWidth;
     }
   }
 
