@@ -453,6 +453,9 @@ var resizePizzas = function(size) {
   function changePizzaSizes(size) {
       // these only need calculated once, not 200 times...
         var randomPizzaContainer = document.getElementsByClassName('randomPizzaContainer');
+
+        console.log(randomPizzaContainer);
+
         var l = randomPizzaContainer.length;
         var dx = determineDx(randomPizzaContainer[0], size);
 
