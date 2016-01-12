@@ -513,7 +513,7 @@ function updatePositions() {
 // Take these items out of the for loop
 
   var relPosition = document.body.scrollTop / 1250;
-  var phase = ;
+  var phase;
 
 
   for (var i = 0; i < items.length; i++) {
