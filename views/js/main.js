@@ -427,7 +427,6 @@ var resizePizzas = function(size) {
     var windowWidth = document.querySelector("#randomPizzas").offsetWidth;
     var oldSize = oldWidth / windowWidth;
 
-    // TODO: change to 3 sizes? no more xl?
     // Changes the slider value to a percent width
     function sizeSwitcher (size) {
       switch(size) {
@@ -450,10 +449,16 @@ var resizePizzas = function(size) {
 
   // Iterates through pizza elements on the page and changes their widths
   function changePizzaSizes(size) {
-    for (var i = 0; i < document.querySelectorAll(".randomPizzaContainer").length; i++) {
-      var dx = determineDx(document.querySelectorAll(".randomPizzaContainer")[i], size);
-      var newwidth = (document.querySelectorAll(".randomPizzaContainer")[i].offsetWidth + dx) + 'px';
-      document.querySelectorAll(".randomPizzaContainer")[i].style.width = newwidth;
+      // these only need calculated once, not 200 times...
+        var randomPizzaContainer = document.getElementsByClassName('randomPizzaContainer');
+        var l = randomPizzaContainer.length;
+        var dx = determineDx(randomPizzaContainer[0], size);
+
+    for (var i = 0; i < l ; i++) {
+      //var dx = determineDx(document.querySelectorAll(".randomPizzaContainer")[i], size);
+      //var newwidth = (document.querySelectorAll(".randomPizzaContainer")[i].offsetWidth + dx) + 'px';
+      //document.querySelectorAll(".randomPizzaContainer")[i].style.width = newwidth;
+      randomPizzaContainer[i].style.width = newwidth;
     }
   }
 
@@ -469,8 +474,9 @@ var resizePizzas = function(size) {
 window.performance.mark("mark_start_generating"); // collect timing data
 
 // This for-loop actually creates and appends all of the pizzas when the page loads
+// This doesn't need to be in the loop though (moved)
+var pizzasDiv = document.getElementById("randomPizzas");
 for (var i = 2; i < 100; i++) {
-  var pizzasDiv = document.getElementById("randomPizzas");
   pizzasDiv.appendChild(pizzaElementGenerator(i));
 }
 
@@ -502,9 +508,16 @@ function updatePositions() {
   frame++;
   window.performance.mark("mark_start_frame");
 
-  var items = document.querySelectorAll('.mover');
+  var items = document.getElementsByClassName('mover'); // changed id method from querySelectorAll
+
+// Take these items out of the for loop
+
+  var relPosition = document.body.scrollTop / 1250;
+  var phase = ;
+
+
   for (var i = 0; i < items.length; i++) {
-    var phase = Math.sin((document.body.scrollTop / 1250) + (i % 5));
+    phase = Math.sin(relPosition + (i%5));
     items[i].style.left = items[i].basicLeft + 100 * phase + 'px';
   }
 
