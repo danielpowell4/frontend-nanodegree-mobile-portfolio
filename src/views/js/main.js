@@ -458,9 +458,9 @@ var resizePizzas = function(size) {
         var newWidth = randomPizzaContainer[0].offsetWidth + dx + 'px';
 
     for (var i = 0; i < l ; i++) {
-      //var dx = determineDx(document.querySelectorAll(".randomPizzaContainer")[i], size);
-      //var newwidth = (document.querySelectorAll(".randomPizzaContainer")[i].offsetWidth + dx) + 'px';
-      //document.querySelectorAll(".randomPizzaContainer")[i].style.width = newwidth;
+      // TAKEN OUT OF THE FOR LOOP TO SPEED IT UP! var dx = determineDx(document.querySelectorAll(".randomPizzaContainer")[i], size);
+      // TAKEN OUT OF THE FOR LOOP TO SPEED IT UP! var newwidth = (document.querySelectorAll(".randomPizzaContainer")[i].offsetWidth + dx) + 'px';
+      // TAKEN OUT OF THE FOR LOOP TO SPEED IT UP! document.querySelectorAll(".randomPizzaContainer")[i].style.width = newwidth;
       randomPizzaContainer[i].style.width = newWidth;
     }
   }
@@ -513,16 +513,32 @@ function updatePositions() {
 
   var items = document.getElementsByClassName('mover'); // changed id method from querySelectorAll
 
-// Take these items out of the for loop
 
+// Rethink loop below in larger terms to not calculate terms that repeat unnecessarily
+
+  var phaseArray = [];
   var relPosition = document.body.scrollTop / 1250;
-  var phase;
-
-
-  for (var i = 0; i < items.length; i++) {
-    phase = Math.sin(relPosition + (i%5));
-    items[i].style.left = items[i].basicLeft + 100 * phase + 'px';
+  for (var i = 0; i < 5; i++) {
+   phaseArray.push(Math.sin(relPosition + i));
   }
+  var phase;
+  for (var i = 0; i < items.length; i++) {
+   phase = phaseArray[i%5];
+   items[i].style.left = items[i].basicLeft + 100 * phase + 'px';
+  }
+
+  // code submitted in first try is commented out below, just in case:
+
+  // Take these items out of the for loop
+  //  var relPosition = document.body.scrollTop / 1250;
+  //  var phase;
+
+    // for (var i = 0; i < items.length; i++) {
+    //   phase = Math.sin(relPosition + (i%5));
+    //   items[i].style.left = items[i].basicLeft + 100 * phase + 'px';
+    //  }
+
+
 
   // User Timing API to the rescue again. Seriously, it's worth learning.
   // Super easy to create custom metrics.
