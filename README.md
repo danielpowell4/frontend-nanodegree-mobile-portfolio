@@ -18,11 +18,11 @@ When last checked, PageSpeeds gave the Mobile and Desktop scores at 96 & 97 resp
 Part 2: Optimize Frames per Second in pizza.html
 ===============================================================
 
-The main.js file was improved upon and then minified. Specifically loops were optimized such that only the needed variables and functions were being declared and calculated--significantly improving performance. Basic changes were also made to pizza.html (moving and minifing styles and scripts) to improve performance. Cam did NOT make the layout of pizza.html responsive including NOT including a viewport meta tag. What a shame.
+The main.js file was improved upon and then minified. The total number of pizzas on the page was reduced from 200 to 24 and loops were optimized such that only the needed variables and functions were being declared and calculated--significantly improving performance. In addition query selectors were substituted with the more efficient getElementById. Painting on the pizza page was improved upon using the hardware accelerated CSS "will-change:transform.""  Basic changes were also made to pizza.html (moving and minifing styles and scripts) to improve performance. Cam did NOT make the layout of pizza.html responsive including NOT including a viewport meta tag. What a shame.
 
-* Time to generate pizzas on load: 20.725000000000023ms
-* Time to generate pizzas on load: 20.725000000000023ms
-* Average time to generate last 10 frames: ~1.6610000000007858ms
+* Time to generate pizzas on load: 17.685000000000002ms
+* Time to resize pizzas: 0.9099999999962165ms
+* Average time to generate last 10 frames: ~0.2309999999975844ms
 * PageSpeed Insights Desktop: 98/100
 
 Shout out to Cameron Pittman. That guy has taught me an unreal amount.
